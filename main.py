@@ -1,8 +1,8 @@
 # lexer calculator
 
 # input '142 + 4 * 10 + (4 * 5)'
-text = '142 + 4 * 10 + (4 * 5)'
-
+# text = '142 + 4 * 10 + (4 * 5)'
+text = '142 + 4'
 
 # separate tokens from string
     # maybe toss them in a list
@@ -30,7 +30,7 @@ def tokenize(string):
     # perform the split
     tokens = []
     current_string = ''
-    for char in string:
+    for i, char in enumerate(string):
         if char == '(' or char == ')':
             # closing ')' will have value before them
             if current_string:
@@ -42,6 +42,10 @@ def tokenize(string):
             # if there is a space and a value we can assume a value has finished
             tokens.append(current_string)
             current_string = ''
+        elif i + 1 == len(string):
+            # we are on the last char
+            current_string += char
+            tokens.append(current_string)
         else:
             current_string += char
     
@@ -61,6 +65,27 @@ split = tokenize(text)
 print(split)
 
 # splitting calculations into sep functions so it can recurse
+def calc(tokens):
+    pass
+    # going to have one loop per operator
+    # because -- how can you add unless you know that all parens are taken care of
+    # i = 0
+    # stop = len(tokens)
+    # while i < stop:
+    #     if token == '(':
+    #         # build list to recursively invoke
+    #         sub_tokens = []
+    #         # start one after i, since i is a '('
+    #         j = i + 1
+    #         while tokens[j] != ')':
+    #             sub_tokens.append[token[i]]
+    #             j += 1
+            
+            
+        
+
+            
+
 
 # identify operators and order of operations
     # higher order operators could be  flattened in place as they are found
