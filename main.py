@@ -1,6 +1,30 @@
 # lexer calculator
 
 # input '142 + 4 * 10 + (4 * 5)'
+text = '142 + 4 * 10 + (4 * 5)'
+
+def tokenize(string):
+    # perform the split
+    tokens = []
+    current_string = ''
+    for char in string:
+        if char == '(' or char == ')':
+            # closing ')' will have value before them
+            if current_string:
+                tokens.append(current_string)
+                current_string = ''
+            # add the '(' or ')'
+            tokens.append(char)
+        elif char == ' ' and current_string != '':
+            # is there is a space and a value we can assume a value has finished
+            tokens.append(current_string)
+            current_string = ''
+        else:
+            current_string += char
+    
+    return tokens
+
+split = tokenize(text)
 
 # separate tokens from string
     # maybe toss them in a list
@@ -27,7 +51,8 @@
     # () ^ * / + -
 
 
-print ("Welcome to the lexer!")
+# print ("Welcome to the lexer!")
 
-while True: 
-    text = input(">")
+# while True: 
+#     text = input(">")
+
