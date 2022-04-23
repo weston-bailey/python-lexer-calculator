@@ -3,6 +3,29 @@
 # input '142 + 4 * 10 + (4 * 5)'
 text = '142 + 4 * 10 + (4 * 5)'
 
+
+# separate tokens from string
+    # maybe toss them in a list
+    # '142 + 4 * 10 + (4 * 5)' => [ '142', '+', '4', '*', '10', '+', '(', '4', '*', '5', ')' ]
+        # will need to identify numbers, symbols and spaces (possibly invaldis chars too)
+
+# all valid operation symbols
+symbols =  [ '(', ')',  '^',  '*',  '/',  '+' ] 
+
+def is_float(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
+def is_int(string):
+    try:
+        int(string)
+        return True
+    except ValueError:
+        return False
+
 def tokenize(string):
     # perform the split
     tokens = []
@@ -16,20 +39,28 @@ def tokenize(string):
             # add the '(' or ')'
             tokens.append(char)
         elif char == ' ' and current_string != '':
-            # is there is a space and a value we can assume a value has finished
+            # if there is a space and a value we can assume a value has finished
             tokens.append(current_string)
             current_string = ''
         else:
             current_string += char
     
+    # strings to nums 
+    for i, token in enumerate(tokens):
+        if is_int(token):
+            tokens[i] = int(token)
+        elif is_float(token):
+            tokens[i] = float(token)
+        elif token not in symbols:
+            print(f'symbol {token} not recognized as a valid operator, use: () ^ * / + -')
+            quit()
+
     return tokens
 
 split = tokenize(text)
+print(split)
 
-# separate tokens from string
-    # maybe toss them in a list
-    # '142 + 4 * 10 + (4 * 5)' => [ '142', '+', '4', '*', '10', '+', '(', '4', '*', '5', ')' ]
-        # will need to identify numbers, symbols and spaces (possibly invaldis chars too)
+# splitting calculations into sep functions so it can recurse
 
 # identify operators and order of operations
     # higher order operators could be  flattened in place as they are found
