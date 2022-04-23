@@ -2,7 +2,7 @@
 
 # input '142 + 4 * 10 + (4 * 5)'
 # text = '142 + 4 * 10 + (4 * 5)'
-text = '142 + 4'
+text = '142 + 4 - 6 / 2 * 3'
 
 # separate tokens from string
     # maybe toss them in a list
@@ -10,7 +10,7 @@ text = '142 + 4'
         # will need to identify numbers, symbols and spaces (possibly invaldis chars too)
 
 # all valid operation symbols
-symbols =  [ '(', ')',  '^',  '*',  '/',  '+' ] 
+symbols =  [ '(', ')',  '^',  '*',  '/',  '+', '-' ] 
 
 def is_float(string):
     try:
@@ -56,17 +56,18 @@ def tokenize(string):
         elif is_float(token):
             tokens[i] = float(token)
         elif token not in symbols:
-            print(f'symbol {token} not recognized as a valid operator, use: () ^ * / + -')
+            print(f'symbol "{token}" not recognized as a valid operator, use: () ^ * / + -')
             quit()
 
     return tokens
 
 split = tokenize(text)
-print(split)
+print('split:', split)
 
 # splitting calculations into sep functions so it can recurse
 def calc(tokens):
-    pass
+    # ()
+
     # going to have one loop per operator
     # because -- how can you add unless you know that all parens are taken care of
     # i = 0
@@ -81,10 +82,37 @@ def calc(tokens):
     #             sub_tokens.append[token[i]]
     #             j += 1
             
-            
+    # non parens ops
+    length = len(tokens)
+    while length > 1:
+        if tokens[1] == '*':
+            prod = tokens[0] * tokens[2]
+            del tokens[0:3]
+            tokens.insert(0, prod)
+            length = len(tokens)
+        elif tokens[1] == '/':
+            div = tokens[0] / tokens[2]
+            del tokens[0:3]
+            tokens.insert(0, div)
+            length = len(tokens)
+        elif tokens[1] == '+':
+            sum_of = tokens[0] + tokens[2]
+            del tokens[0:3]
+            tokens.insert(0, sum_of)
+            length = len(tokens)
+        elif tokens[1] == '-':
+            diff = tokens[0] - tokens[2]
+            del tokens[0:3]
+            tokens.insert(0, diff)
+            length = len(tokens)
+
         
 
-            
+    return tokens[0]
+
+
+calculation = calc(split)
+print('calculation:', calculation )
 
 
 # identify operators and order of operations
