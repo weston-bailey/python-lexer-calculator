@@ -1,24 +1,16 @@
-from lib.tokenize import tokenize
-from lib.calc import calc
+if __name__ == "__main__":
+    from lib.tokenize import tokenize
+    from lib.calc import calc
 
-# input '142 + 4 * 10 + (4 * 5)'
-# text = '142 + 4 * 10 + (4 * 5) + (2 ^ 4) - (10 / 2)'
-# text = '142 + 4 - 6 / 2 * 3'
-# text = '142 + 4 + 3 - 5 * 5'
-# text = '3 * 3 + 2 - 10 / 2'
+    QUIT_CHAR = 'q'
 
-## curently failing nested parens
-text ='142 + 4 + 3 ^ 5 * 5'
+    print("Welcome to the lexer!")
+    print(f"Enter an expression or type {QUIT_CHAR} to exit") 
 
-
-split = tokenize(text)
-print('split:', split)
-
-# calculation = calc(split)
-# print('calculation:', calculation )
-
-# print ("Welcome to the lexer!")
-
-# while True: 
-#     text = input(">")
+    while True: 
+        text = input("> ")
+        if (text == QUIT_CHAR): break
+        tokens = tokenize(text)
+        result = calc(tokens)
+        print(result)
 

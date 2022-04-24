@@ -27,6 +27,6 @@
 
 ## Todos
 
-* write some unit tests
+* [x] write some unit tests
 * add parens
 * make cli interface
