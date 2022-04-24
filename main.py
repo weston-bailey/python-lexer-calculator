@@ -77,6 +77,9 @@ def calc(tokens):
             sub_tokens = []
             # start one after i, since i is a '('
             j = i + 1
+            # the problem is, when parens are nested (4 * (2 + 3))
+            # the first paran '3)' is matched and the second paren is not passed to the recursion 4 * (2 + 3
+            # when it should be  4 * (2 + 3)
             while tokens[j] != ')':
                 print('j', j, tokens[j])
                 print(tokens)
