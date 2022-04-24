@@ -1,6 +1,6 @@
 # Lexer
 
-run `make` to start he program
+run `make` to start the program
 
 ```python
 # separate tokens from string
