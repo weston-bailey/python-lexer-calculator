@@ -91,8 +91,17 @@ def calc(tokens):
         i += 1
 
     # ## # ## #          
-    # non parens ops
     
+    # non parens ops
+    # exponents
+    i = 0
+    while i < len(tokens):
+        if tokens[i] == '^':
+            power = tokens[i - 1] ** tokens[i + 1]
+            tokens = tokens[:i - 1] + [power] + tokens[i + 2:]
+            i = i - 1
+        i += 1
+
     # multiplacation
     i = 0
     while i < len(tokens):
@@ -132,14 +141,15 @@ def calc(tokens):
 
     return tokens[0]
 
+
 # input '142 + 4 * 10 + (4 * 5)'
-# text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
+text = '142 + 4 * 10 + (4 * 5) + (2 ^ 4) - (10 / 2)'
 # text = '142 + 4 - 6 / 2 * 3'
 # text = '142 + 4 + 3 - 5 * 5'
 # text = '3 * 3 + 2 - 10 / 2'
 
 ## curently failing nested parens
-text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
+# text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
 
 
 split = tokenize(text)
