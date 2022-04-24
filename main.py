@@ -78,6 +78,8 @@ def calc(tokens):
             # start one after i, since i is a '('
             j = i + 1
             while tokens[j] != ')':
+                print('j', j, tokens[j])
+                print(tokens)
                 sub_tokens.append(tokens[j])
                 j += 1
             
@@ -120,7 +122,7 @@ def calc(tokens):
     while i < len(tokens):
         if tokens[i] == '-':
             diff = tokens[i - 1] - tokens[i + 1]
-            tokenfloats = tokens[:i - 1] + [diff] + tokens[i + 2:]
+            tokens = tokens[:i - 1] + [diff] + tokens[i + 2:]
             i = i - 1
         i += 1
 
@@ -128,13 +130,13 @@ def calc(tokens):
     return tokens[0]
 
 # input '142 + 4 * 10 + (4 * 5)'
-text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
+# text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
 # text = '142 + 4 - 6 / 2 * 3'
 # text = '142 + 4 + 3 - 5 * 5'
 # text = '3 * 3 + 2 - 10 / 2'
 
 ## curently failing nested parens
-# text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
+text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
 
 
 split = tokenize(text)
