@@ -120,7 +120,7 @@ def calc(tokens):
     while i < len(tokens):
         if tokens[i] == '-':
             diff = tokens[i - 1] - tokens[i + 1]
-            tokens = tokens[:i - 1] + [diff] + tokens[i + 2:]
+            tokenfloats = tokens[:i - 1] + [diff] + tokens[i + 2:]
             i = i - 1
         i += 1
 
