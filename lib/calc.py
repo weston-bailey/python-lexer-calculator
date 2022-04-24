@@ -8,33 +8,22 @@ def calc(tokens):
 
     # ## # ## #
     # parenthsis
-    print(tokens)
+
     i = 0
     stop = len(tokens)
     while i < stop:
         if tokens[i] == '(':
             # build list to recursively invoke
-            sub_tokens = [i]
-
+            sub_tokens = []
             # start one after i, since i is a '('
             j = i + 1
             # the problem is, when parens are nested (4 * (2 + 3))
             # the first paran '3)' is matched and the second paren is not passed to the recursion 4 * (2 + 3
             # when it should be  4 * (2 + 3)
-            # keep track if another opening parens '(' is encountered
-            matches = 1
-            # while matches > 0:
             while tokens[j] != ')':
-                print('j', j, tokens[j], len(tokens))
-                # print(tokens)
                 sub_tokens.append(tokens[j])
-                if tokens[j] == '(':
-                    matches = matches + 1
-                elif tokens[j] == ')':
-                    matches = matches - 1
                 j += 1
             
-            print(sub_tokens)
             return calc(tokens[:i] + [calc(sub_tokens)] + tokens[j + 1:])
         
         i += 1
