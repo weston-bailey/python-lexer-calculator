@@ -8,14 +8,14 @@ from lib.calc import calc
 # text = '3 * 3 + 2 - 10 / 2'
 
 ## curently failing nested parens
-text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
+text ='142 + 4 + 3 ^ 5 * 5'
 
 
 split = tokenize(text)
 print('split:', split)
 
-calculation = calc(split)
-print('calculation:', calculation )
+# calculation = calc(split)
+# print('calculation:', calculation )
 
 # print ("Welcome to the lexer!")
 

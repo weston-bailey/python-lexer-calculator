@@ -24,3 +24,6 @@ class TestTypeCheck(TestCase):
 
         print(f"\t{i} is a type {type(i)}, should return {True}")
         self.assertTrue(is_int(i))
+
+if __name__ == "main":
+    main()

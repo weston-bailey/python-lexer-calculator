@@ -5,4 +5,4 @@ debug:
 	python3 -m pdb main.py
 
 test:
-	python3 -m unittest lib/*_test.py
+	python3 -m unittest lib/*test.py
