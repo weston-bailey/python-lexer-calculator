@@ -8,8 +8,7 @@
 
 # identify operators and order of operations
     # higher order operators could be  flattened in place as they are found
-        # option 1 -- one loop per operator one by one
-        # option 2 -- a single loop that checks each token for needed operation
+        # option 1 -- one loop per operator one by one -- this must be done to preserve the order of operations
     # strings of nums to nums
         # [ 142, '+', 4, '*', 10, '+', '(', 4, '*', 5, ')' ]
     # look for opening '(' and matches ')' -- recursively invoke
