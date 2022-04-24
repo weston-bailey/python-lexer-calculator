@@ -1,16 +1,7 @@
-# input '142 + 4 * 10 + (4 * 5)'
-text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
-# text = '142 + 4 - 6 / 2 * 3'
-# text = '142 + 4 + 3 - 5 * 5'
-# text = '3 * 3 + 2 - 10 / 2'
-
-## curently failing nested parens
-# text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
-
-# all valid operation symbols
-symbols =  [ '(', ')',  '^',  '*',  '/',  '+', '-' ] 
-
 def is_float(string):
+    '''
+        tests if string is a valid float, returns bool
+    '''
     try:
         float(string)
         return True
@@ -18,6 +9,9 @@ def is_float(string):
         return False
 
 def is_int(string):
+    '''
+        tests if string is a valid int, returns bool
+    '''
     try:
         int(string)
         return True
@@ -25,7 +19,12 @@ def is_int(string):
         return False
 
 def tokenize(string):
-    # perform the split
+    '''
+        takes string and returns valid token list
+    '''
+    # all valid operation symbols
+    symbols =  [ '(', ')',  '^',  '*',  '/',  '+', '-' ]
+    # list to store tokens 
     tokens = []
     current_string = ''
     for i, char in enumerate(string):
@@ -59,15 +58,17 @@ def tokenize(string):
 
     return tokens
 
-split = tokenize(text)
-print('split:', split)
-
 # splitting calculations into sep functions so it can recurse
 def calc(tokens):
-    # ()
-
+    '''
+        flattens list of tokens down to single value
+    '''
     # going to have one loop per operator
     # because -- how can you add unless you know that all parens are taken care of
+
+    # ## # ## #
+    # parenthsis
+
     i = 0
     stop = len(tokens)
     while i < stop:
@@ -83,7 +84,8 @@ def calc(tokens):
             return calc(tokens[:i] + [calc(sub_tokens)] + tokens[j + 1:])
         
         i += 1
-            
+
+    # ## # ## #          
     # non parens ops
     
     # multiplacation
@@ -122,64 +124,21 @@ def calc(tokens):
             i = i - 1
         i += 1
 
-    # length = len(tokens)
-    # i = 0
-    # while length > 1:
-        
-    #     if tokens[i] == '*':
-    #         prod = tokens[i - 1] * tokens[i + 1]
-    #         tokens
-    #         tokens = tokens[:i - 1] + [prod] + tokens[i + 2:]
-    #         print('hi', tokens[:i - 1] + [prod] + tokens[i + 2:])
-    #         length = len(tokens)
-    #         i = i - 1
-    #         continue
-    #     elif tokens[i] == '/':
-    #         diff = tokens[i - 1] / tokens[i + 1]
-    #         tokens = tokens[:i - 1] + [diff] + tokens[i + 2:]
-    #         length = len(tokens)
-    #         i = i - 1
-    #         continue
-    #     elif tokens[i] == '+':
-    #         sum_of = tokens[i - 1] + tokens[i + 1]
-    #         tokens = tokens[:i - 1] + [sum_of] + tokens[i + 2:]
-    #         length = len(tokens)
-    #         i = i - 1
-    #         continue
-    #     elif tokens[i] == '-':
-    #         diff = tokens[i - 1] - tokens[i + 1]
-    #         tokens = tokens[:i - 1] + [diff] + tokens[i + 2:]
-    #         length = len(tokens)
-    #         i = i -1 
-    #     i += 1
-
-    # length = len(tokens)
-    # while length > 1:
-    #     if tokens[1] == '*':
-    #         prod = tokens[0] * tokens[2]
-    #         del tokens[0:3]
-    #         tokens.insert(0, prod)
-    #         length = len(tokens)
-    #     elif tokens[1] == '/':
-    #         div = tokens[0] / tokens[2]
-    #         del tokens[0:3]
-    #         tokens.insert(0, div)
-    #         length = len(tokens)
-    #     elif tokens[1] == '+':
-    #         sum_of = tokens[0] + tokens[2]
-    #         del tokens[0:3]
-    #         tokens.insert(0, sum_of)
-    #         length = len(tokens)
-    #     elif tokens[1] == '-':
-    #         diff = tokens[0] - tokens[2]
-    #         del tokens[0:3]
-    #         tokens.insert(0, diff)
-    #         length = len(tokens)
-
-        
 
     return tokens[0]
 
+# input '142 + 4 * 10 + (4 * 5)'
+text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
+# text = '142 + 4 - 6 / 2 * 3'
+# text = '142 + 4 + 3 - 5 * 5'
+# text = '3 * 3 + 2 - 10 / 2'
+
+## curently failing nested parens
+# text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
+
+
+split = tokenize(text)
+print('split:', split)
 
 calculation = calc(split)
 print('calculation:', calculation )
