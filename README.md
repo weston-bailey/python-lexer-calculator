@@ -1,5 +1,7 @@
 # Lexer
 
+run `make` to start he program
+
 ```python
 # separate tokens from string
     # maybe toss them in a list
@@ -28,5 +30,5 @@
 ## Todos
 
 * [x] write some unit tests
-* add parens
-* make cli interface
+* [ ] add parens
+* [ ] make cli interface
