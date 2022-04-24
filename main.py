@@ -1,8 +1,11 @@
 # input '142 + 4 * 10 + (4 * 5)'
-text = '142 + 4 * 10 + (4 * 5)'
+text = '142 + 4 * 10 + (4 * 5) - (10 / 2)'
 # text = '142 + 4 - 6 / 2 * 3'
 # text = '142 + 4 + 3 - 5 * 5'
 # text = '3 * 3 + 2 - 10 / 2'
+
+## curently failing nested parens
+# text = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
 
 # all valid operation symbols
 symbols =  [ '(', ')',  '^',  '*',  '/',  '+', '-' ] 
@@ -29,18 +32,18 @@ def tokenize(string):
         if char == '(' or char == ')':
             # closing ')' will have value before them
             if current_string:
-                tokens.append(current_string)
+                tokens.append(current_string.strip())
                 current_string = ''
             # add the '(' or ')'
             tokens.append(char)
         elif char == ' ' and current_string != '':
             # if there is a space and a value we can assume a value has finished
-            tokens.append(current_string)
+            tokens.append(current_string.strip())
             current_string = ''
         elif i + 1 == len(string):
             # we are on the last char
             current_string += char
-            tokens.append(current_string)
+            tokens.append(current_string.strip())
         else:
             current_string += char
     
