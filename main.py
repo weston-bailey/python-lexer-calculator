@@ -1,8 +1,8 @@
 # input '142 + 4 * 10 + (4 * 5)'
-# text = '142 + 4 * 10 + (4 * 5)'
+text = '142 + 4 * 10 + (4 * 5)'
 # text = '142 + 4 - 6 / 2 * 3'
 # text = '142 + 4 + 3 - 5 * 5'
-text = '3 * 3 + 2 - 10 / 2'
+# text = '3 * 3 + 2 - 10 / 2'
 
 # all valid operation symbols
 symbols =  [ '(', ')',  '^',  '*',  '/',  '+', '-' ] 
@@ -65,17 +65,21 @@ def calc(tokens):
 
     # going to have one loop per operator
     # because -- how can you add unless you know that all parens are taken care of
-    # i = 0
-    # stop = len(tokens)
-    # while i < stop:
-    #     if token == '(':
-    #         # build list to recursively invoke
-    #         sub_tokens = []
-    #         # start one after i, since i is a '('
-    #         j = i + 1
-    #         while tokens[j] != ')':
-    #             sub_tokens.append[token[i]]
-    #             j += 1
+    i = 0
+    stop = len(tokens)
+    while i < stop:
+        if tokens[i] == '(':
+            # build list to recursively invoke
+            sub_tokens = []
+            # start one after i, since i is a '('
+            j = i + 1
+            while tokens[j] != ')':
+                sub_tokens.append(tokens[j])
+                j += 1
+            
+            return calc(tokens[:i] + [calc(sub_tokens)] + tokens[j + 1:])
+        
+        i += 1
             
     # non parens ops
     
