@@ -1,4 +1,5 @@
 from lib.tokenize import tokenize
+from lib.calc import calc
 from unittest import TestCase, main
 
 input_one = '142 + 4 * 10 + (4 * 5) + (2 ^ 4) - (10 / 2)'
@@ -54,7 +55,35 @@ class TestTokenize(TestCase):
         self.assertListEqual(tokenize(input_five), tokens_five)
 
 class TestCalc(TestCase):
-    pass
+    def test_tokens_one(self):
+        print(f"tokens_one: {tokens_one}")
+
+        print("\tit should return {result_one}")
+        self.assertEquals(calc(tokens_one), result_one)
+    
+    def test_tokens_two(self):
+        print(f"tokens_two: {tokens_two}")
+
+        print("\tit should return {result_two}")
+        self.assertEquals(calc(tokens_two), result_two)
+
+    def test_tokens_three(self):
+        print(f"tokens_three: {tokens_three}")
+
+        print("\tit should return {result_three}")
+        self.assertEquals(calc(tokens_three), result_three)
+    
+    def test_tokens_four(self):
+        print(f"tokens_four: {tokens_four}")
+
+        print("\tit should return {result_four}")
+        self.assertEquals(calc(tokens_four), result_four)
+    
+    def test_tokens_five(self):
+        print(f"tokens_five: {tokens_five}")
+
+        print("\tit should return {result_five}")
+        self.assertEquals(calc(tokens_five), result_five)
 
 if __name__ == "main":
     main()

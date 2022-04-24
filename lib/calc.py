@@ -23,7 +23,8 @@ def calc(tokens):
             # when it should be  4 * (2 + 3)
             # keep track if another opening parens '(' is encountered
             matches = 1
-            while matches > 0:
+            # while matches > 0:
+            while tokens[j] != ')':
                 print('j', j, tokens[j], len(tokens))
                 # print(tokens)
                 sub_tokens.append(tokens[j])
