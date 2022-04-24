@@ -4,7 +4,7 @@
 # separate tokens from string
     # maybe toss them in a list
     # '142 + 4 * 10 + (4 * 5)' => [ '142', '+', '4', '*', '10', '+', '(', '4', '*', '5', ')' ]
-        # will need to identify numbers, symbols and spaces (possibly invaldis chars too)
+        # will need to identify numbers, symbols and spaces (possibly invalid chars too)
 
 # identify operators and order of operations
     # higher order operators could be  flattened in place as they are found
