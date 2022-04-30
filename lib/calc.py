@@ -20,10 +20,8 @@ def calc(tokens):
             sub_tokens = []
             # start one after i, since i is a '('
             j = i + 1
-            # the problem is, when parens are nested (4 * (2 + 3))
-            # the first paran '3)' is matched and the second paren is not passed to the recursion 4 * (2 + 3
-            # when it should be  4 * (2 + 3)
-            matches = 1 # the amount of closing parans needed to match
+            # the amount of closing parans needed to match
+            matches = 1
             while matches > 0:
                 if tokens[j] == ')':
                     matches = matches - 1
