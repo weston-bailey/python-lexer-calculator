@@ -1,6 +1,32 @@
-# Lexer
+# Lexer/Math Expression Evaluator
 
-run `make` to start the program
+This is a command line program that evaluates mathmatical expressions according to PEMDAS.
+
+* run `make` to start the program
+* run `make test` to run the unit tests
+* run `make debug` to start the pdb 
+* run `make watch` to run the test suite with nodemon
+
+Example usage:
+
+Respected operators: `() ^ * / + -`
+
+```shell
+$ make
+Welcome to the lexer!
+Enter an expression or type q to exit
+> 142 + 4 * 10 / 1 ^ 2 - 1
+181.0
+> (10 * (4 + 2))         
+60
+> q
+Goodbye!
+$
+```
+
+
+
+## Notes/Pseudocode
 
 ```python
 # separate tokens from string
@@ -30,5 +56,5 @@ run `make` to start the program
 ## Todos
 
 * [x] write some unit tests
-* [ ] add parens
-* [ ] make cli interface
+* [x] add parens
+* [x] make cli interface

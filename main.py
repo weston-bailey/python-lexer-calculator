@@ -10,7 +10,9 @@ if __name__ == "__main__":
 
     while True: 
         text = input("> ")
-        if text == QUIT_CHAR: break
+        if text == QUIT_CHAR:
+            print("Goodbye!")
+            break
         tokens = tokenize(text)
         if not tokens: continue
         history.append(text)
