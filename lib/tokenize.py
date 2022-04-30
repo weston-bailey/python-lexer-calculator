@@ -37,5 +37,5 @@ def tokenize(string):
         elif token not in symbols:
             print(f'symbol "{token}" not recognized as a valid operator, use: () ^ * / + -')
             return False
-    print(tokens)
+
     return tokens
