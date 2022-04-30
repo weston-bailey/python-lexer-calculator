@@ -3,14 +3,17 @@ if __name__ == "__main__":
     from lib.calc import calc
 
     QUIT_CHAR = 'q'
+    history = []
 
     print("Welcome to the lexer!")
     print(f"Enter an expression or type {QUIT_CHAR} to exit") 
 
     while True: 
         text = input("> ")
-        if (text == QUIT_CHAR): break
+        if text == QUIT_CHAR: break
         tokens = tokenize(text)
+        if not tokens: continue
+        history.append(text)
         result = calc(tokens)
         print(result)
 

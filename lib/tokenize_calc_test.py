@@ -2,21 +2,21 @@ from lib.tokenize import tokenize
 from lib.calc import calc
 from unittest import TestCase, main
 
-input_one = '142 + 4 * 10 + (4 * 5) + (2 ^ 4) - (10 / 2)'
-tokens_one = [142, '+', 4, '*', 10, '+', '(', 4, '*', 5, ')', '+', '(', 2, '^', 4, ')', '-', '(', 10, '/', 2, ')']
-result_one = 203.0
+input_one = '142 + 4 * 10 / 1 ^ 2 - 1'
+tokens_one = [142, '+', 4, '*', 10, '/', 1, '^', 2, '-', 1]
+result_one = 181.0
 
 input_two = '142 + 4 - 6 / 2 * 3'
 tokens_two = [142, '+', 4, '-', 6, '/', 2, '*', 3]
 result_two = 137
 
-input_three = '142 + 4 + 3 ^ 5 * 5'
-tokens_three = [142, '+', 4, '+', 3, '^', 5, '*', 5]
-result_three = 140
+input_three = '142 + (4 + 3) ^ (5 * 5)'
+tokens_three = [142, '+', '(', 4, '+', 3, ')', '^', '(', 5, '*', 5, ')']
+result_three = 1341068619663964900949
 
-input_four = '3 * 3 + 2 - 10 / 2'
-tokens_four = [3, '*', 3, '+', 2, '-', 10, '/', 2]
-result_four = 6.0
+input_four = '3 * (3 + 2) - 10 / 2'
+tokens_four = [3, '*', '(', 3, '+', 2, ')', '-', 10, '/', 2]
+result_four = 10
 
 ## curently failing nested parens
 input_five = '142 + 4 * 10 + (4 * 5) - (10 / (1 + 1))'
@@ -58,31 +58,31 @@ class TestCalc(TestCase):
     def test_tokens_one(self):
         print(f"tokens_one: {tokens_one}")
 
-        print("\tit should return {result_one}")
+        print(f"\tit should return {result_one}")
         self.assertEquals(calc(tokens_one), result_one)
     
     def test_tokens_two(self):
         print(f"tokens_two: {tokens_two}")
 
-        print("\tit should return {result_two}")
+        print(f"\tit should return {result_two}")
         self.assertEquals(calc(tokens_two), result_two)
 
     def test_tokens_three(self):
         print(f"tokens_three: {tokens_three}")
 
-        print("\tit should return {result_three}")
+        print(f"\tit should return {result_three}")
         self.assertEquals(calc(tokens_three), result_three)
     
     def test_tokens_four(self):
         print(f"tokens_four: {tokens_four}")
 
-        print("\tit should return {result_four}")
+        print(f"\tit should return {result_four}")
         self.assertEquals(calc(tokens_four), result_four)
     
     def test_tokens_five(self):
         print(f"tokens_five: {tokens_five}")
 
-        print("\tit should return {result_five}")
+        print(f"\tit should return {result_five}")
         self.assertEquals(calc(tokens_five), result_five)
 
 if __name__ == "main":
