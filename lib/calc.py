@@ -1,4 +1,7 @@
 # splitting calculations into sep functions so it can recurse
+from soupsieve import match
+
+
 def calc(tokens):
     '''
         flattens list of tokens down to single value
@@ -20,8 +23,15 @@ def calc(tokens):
             # the problem is, when parens are nested (4 * (2 + 3))
             # the first paran '3)' is matched and the second paren is not passed to the recursion 4 * (2 + 3
             # when it should be  4 * (2 + 3)
-            while tokens[j] != ')':
+            matches = 1 # the amount of closing parans needed to match
+            while matches > 0:
+                if tokens[j] == ')':
+                    matches = matches - 1
+                    if matches == 0: break
+                if tokens[j] == '(':
+                    matches += 1
                 sub_tokens.append(tokens[j])
+                
                 j += 1
             
             return calc(tokens[:i] + [calc(sub_tokens)] + tokens[j + 1:])
@@ -39,23 +49,27 @@ def calc(tokens):
             i = i - 1
         i += 1
 
-    # multiplacation
+    # multiplacation / division
     i = 0
     while i < len(tokens):
         if tokens[i] == '*':
             prod = tokens[i - 1] * tokens[i + 1]
             tokens = tokens[:i - 1] + [prod] + tokens[i + 2:]
             i = i - 1
-        i += 1
-
-    # division
-    i = 0
-    while i < len(tokens):
         if tokens[i] == '/':
             div = tokens[i - 1] / tokens[i + 1]
             tokens = tokens[:i - 1] + [div] + tokens[i + 2:]
             i = i - 1
         i += 1
+
+    # division
+    # i = 0
+    # while i < len(tokens):
+    #     if tokens[i] == '/':
+    #         div = tokens[i - 1] / tokens[i + 1]
+    #         tokens = tokens[:i - 1] + [div] + tokens[i + 2:]
+    #         i = i - 1
+    #     i += 1
 
     # addition
     i = 0
